@@ -18,10 +18,12 @@
 
 Создайте файл .env в корневой директории со следующим содержимым:
 
-```TELEGRAM_BOT_TOKEN=your_bot_token
+```
+TELEGRAM_BOT_TOKEN=your_bot_token
 
 shared_secret=your_shared_secret
 
-user_id=your_user_id```
+user_id=your_user_id
+```
 
 Замените your_bot_token, your_shared_secret и your_user_id
