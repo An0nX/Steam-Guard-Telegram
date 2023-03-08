@@ -26,10 +26,11 @@ async function updateCode() {
         chat_id: process.env['user_id'],
         message_id: messageId,
         parse_mode: 'Markdown',
+        disable_notification: true // отправляем сообщение бесшумно
       });
     } else {
       // иначе отправляем новое сообщение
-      const sentMessage = await bot.sendMessage(process.env['user_id'], message, { parse_mode: 'Markdown' });
+      const sentMessage = await bot.sendMessage(process.env['user_id'], message, { parse_mode: 'Markdown', disable_notification: true });
       messageId = sentMessage.message_id; // сохраняем id отправленного сообщения
     }
   } catch (error) {
@@ -39,9 +40,10 @@ async function updateCode() {
       messageId = null;
     }
     // и отправляем новое сообщение
-    const sentMessage = await bot.sendMessage(process.env['user_id'], message, { parse_mode: 'Markdown' });
+    const sentMessage = await bot.sendMessage(process.env['user_id'], message, { parse_mode: 'Markdown', disable_notification: true });
     messageId = sentMessage.message_id; // сохраняем id отправленного 
   }
 }
-    // запускаем функцию отправки сообщения с кодом Steam Guard раз в 30 секунд
-    setInterval(updateCode, 30000);
+
+// запускаем функцию отправки сообщения с кодом Steam Guard раз в 30 секунд
+setInterval(updateCode, 30000);
