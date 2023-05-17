@@ -2,7 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const SteamTotp = require('steam-totp');
 
 // устанавливаем токен бота
-const token = 'TELEGRAM BOT TOKEN';
+const token = process.env['TELEGRAM_BOT_TOKEN'];
 
 // создаем экземпляр бота
 const bot = new TelegramBot(token, { polling: true });
@@ -23,24 +23,24 @@ async function updateCode() {
     if (messageId) {
       // если id последнего сообщения существует, пытаемся обновить сообщение
       await bot.editMessageText(message, {
-        chat_id: 'USER_ID',
+        chat_id: process.env['user_id'],
         message_id: messageId,
         parse_mode: 'Markdown',
         disable_notification: true // отправляем сообщение бесшумно
       });
     } else {
       // иначе отправляем новое сообщение
-      const sentMessage = await bot.sendMessage('USER_ID', message, { parse_mode: 'Markdown', disable_notification: true });
+      const sentMessage = await bot.sendMessage(process.env['user_id'], message, { parse_mode: 'Markdown', disable_notification: true });
       messageId = sentMessage.message_id; // сохраняем id отправленного сообщения
     }
   } catch (error) {
     // если произошла ошибка при редактировании сообщения, удаляем старое сообщение
     if (messageId) {
-      await bot.deleteMessage('USER_ID', messageId);
+      await bot.deleteMessage(process.env['user_id'], messageId);
       messageId = null;
     }
     // и отправляем новое сообщение
-    const sentMessage = await bot.sendMessage('USER_ID', message, { parse_mode: 'Markdown', disable_notification: true });
+    const sentMessage = await bot.sendMessage(process.env['user_id'], message, { parse_mode: 'Markdown', disable_notification: true });
     messageId = sentMessage.message_id; // сохраняем id отправленного 
   }
 }
