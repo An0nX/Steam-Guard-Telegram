@@ -6,7 +6,7 @@
 
 Скачайте репозиторий с этим скриптом с помощью команды:
 
-`git clone https://github.com/httpshotmaker/Steam-Guard-Telegram.git`
+`git clone <ссылканарепо>.git'
 
 Перейдите в директорию со скриптом:
 
